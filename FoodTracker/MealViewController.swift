@@ -19,6 +19,12 @@ class MealViewController: UIViewController, UITextFieldDelegate,UIImagePickerCon
     override func viewDidLoad() {
         super.viewDidLoad()
         nameTextField.delegate=self
+        if let meal = meal{
+            navigationItem.title = meal.name
+            nameTextField.text = meal.name
+            photoImageView.image = meal.photo
+            ratingControl.rating = meal.rating
+        }
         checkValidMealName()
     }
 
@@ -28,7 +34,12 @@ class MealViewController: UIViewController, UITextFieldDelegate,UIImagePickerCon
     }
 
     @IBAction func cancel(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
+        let isPresentingInAddMealMode = presentingViewController is UINavigationController
+        if isPresentingInAddMealMode{
+            dismiss(animated: true, completion: nil)
+        }else{
+            navigationController!.popViewController(animated: true)
+        }
     }
     //MARK: UITextFieldDelegate
     func textFieldDidBeginEditing(_ textField: UITextField) {
