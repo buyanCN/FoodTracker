@@ -28,7 +28,8 @@ class MealTableViewController: UITableViewController {
         navigationItem.leftBarButtonItem = editButtonItem
         
         if let savedMeals = loadMeals(){
-            meals += savedMeals
+            // this is different from the sample of apple, which is "+="
+            meals = savedMeals
         }else{
             loadSampleMeals()
         }
@@ -126,7 +127,7 @@ class MealTableViewController: UITableViewController {
                 mealDetailViewController.meal = selectedMeal
             }
     }else if segue.identifier == "AddItem"{
-            print("Adding new meal")
+            //print("Adding new meal")
         }
     
     }
